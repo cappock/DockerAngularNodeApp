@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <form [formGroup]="angForm" novalidate>
+    <form [formGroup]="angForm" novalidate (submit)="addBusiness()">
       <div class="form-group">
         <label class="col-md-4">Person Name</label>
 
@@ -13,13 +13,13 @@
       </div>
       <div
         *ngIf="
-          angForm.controls['person_name'].invalid &&
-          (angForm.controls['person_name'].dirty ||
-            angForm.controls['person_name'].touched)
+         f.person_name.invalid &&
+          (f.person_name.dirty ||
+          f.person_name.touched)
         "
         class="alert alert-danger"
       >
-        <div *ngIf="angForm.controls['person_name'].errors.required">
+        <div *ngIf="f.person_name.errors.required">
           Person Name is required.
         </div>
       </div>
@@ -35,11 +35,10 @@
         />
       </div>
       <div
-        *ngIf="angForm.controls['business_name'].invalid && (angForm.control
-    s['business_name'].dirty || angForm.controls['business_name'].touched)"
+        *ngIf="f.business_name.invalid && (f.business_name.dirty || f.business_name.touched)"
         class="alert alert-danger"
       >
-        <div *ngIf="angForm.controls['business_name'].errors.required">
+        <div *ngIf="f.business_name.errors.required">
           Person Business is required.
         </div>
       </div>
@@ -47,26 +46,20 @@
         <label class="col-md-4">Business GST Number </label>
 
         <input
-          type="text"
-          class="form- control"
+          type="number"
+          class="form-control"
           formControlName="business_gst_number"
           #business_gst_number
         />
       </div>
-      <div
-        *ngIf="angForm.controls['business_gst_number'].invalid && (angForm.c
-    ontrols['business_gst_number'].dirty || angForm.controls['business_gst_number']
-    .touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="angForm.controls['business_gst_number'].errors.required">
+      <div *ngIf="f.business_gst_number.invalid && f.business_gst_number.dirty || f.business_gst_number.touched" class="alert alert-danger" >
+        <div *ngIf="f.business_gst_number.errors">
           Business GST Number is required.
         </div>
       </div>
       <div class="form-group">
         <button
-          (click)="addBusiness(person_name.value, business_name.value, buiness_gst_number.value)"
-          [disabled]="angForm.pristine || angForm.invalid"
+            [disabled]="angForm.pristine || angForm.invalid"
           class="btn btn-primary"
         >
           Add Business
