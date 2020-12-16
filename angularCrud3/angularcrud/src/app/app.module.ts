@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CrudAddComponent } from './components/crud-add/crud-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CrudGetComponent } from './components/crud-get/crud-get.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CrudGetComponent } from './components/crud-get/crud-get.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

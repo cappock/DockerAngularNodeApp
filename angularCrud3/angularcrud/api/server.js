@@ -4,7 +4,8 @@ const express = require("express"),
   cors = require("cors"),
   mongoose = require("mongoose"),
   config = require("./DB");
-const businessRoute = require("./routes/business.route");
+
+const businessRoute = require("./routes/business.routes");
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
   () => {
@@ -14,6 +15,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     console.log("Can not connect to the database" + err);
   }
 );
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
