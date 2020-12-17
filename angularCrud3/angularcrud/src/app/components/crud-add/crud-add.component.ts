@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Business } from 'src/app/models/business';
 import { BusinessService } from 'src/app/services/business.service';
+import { first } from 'rxjs/operators';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crud-add',
@@ -28,7 +31,23 @@ export class CrudAddComponent implements OnInit {
 
   addBusiness() {
     const business = new Business(this.angForm.value);
-    this.businessService.addBusiness(business);
+    this.businessService.addBusiness(business)
+    .pipe(first())
+    .subscribe((data: any) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'The busines has been saved'
+      })
+      },
+      (error: any) => {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+    });
+    return;
   }
   
 
